@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="1100.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainInterfaceController">
+   <children>
+      <TableView fx:id="babyTable" layoutX="510.0" layoutY="74.0" prefHeight="502.0" prefWidth="382.0" styleClass="table" stylesheets="@stayle.css">
+        <columns>
+          <TableColumn fx:id="cmName" prefWidth="112.79998779296875" text="Name" />
+          <TableColumn fx:id="cmGender" prefWidth="98.39996337890625" text="Gender" />
+            <TableColumn fx:id="cmTotalFrequency" prefWidth="172.79998779296875" text="Total Frequnecy" />
+        </columns>
+      </TableView>
+      <Label fx:id="lblTotalRecorde" layoutX="510.0" layoutY="583.0" style="-fx-background-color: #ffffff;" text="Total recorde" visible="false">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtTotalRecorde" editable="false" layoutX="509.0" layoutY="609.0" prefHeight="27.0" prefWidth="101.0" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" visible="false">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></TextField>
+      <Label fx:id="lblTotalFrequency" layoutX="773.0" layoutY="583.0" style="-fx-background-color: #ffffff;" text="Total frequency" visible="false">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtTotalFrequency" editable="false" layoutX="773.0" layoutY="609.0" prefHeight="27.0" prefWidth="118.0" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" visible="false">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></TextField>
+      <GridPane alignment="CENTER" hgap="15.0" layoutX="73.0" layoutY="74.0" prefHeight="324.0" prefWidth="320.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="253.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="665.0" AnchorPane.topAnchor="74.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="0.0" prefWidth="0.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="0.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Name">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Gander" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Frequency" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Years" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtName" prefHeight="35.0" prefWidth="100.0" promptText="Name" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" GridPane.columnIndex="1" />
+            <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="223.0" spacing="60.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <RadioButton fx:id="rbMale" contentDisplay="CENTER" mnemonicParsing="false" text="Male">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tgGender" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="rbFemale" contentDisplay="CENTER" mnemonicParsing="false" text="Female" toggleGroup="$tgGender">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></RadioButton>
+               </children>
+            </HBox>
+            <TextField fx:id="txtFrequency" prefHeight="35.0" prefWidth="100.0" promptText="Frequency" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtYear" prefHeight="35.0" prefWidth="100.0" promptText="Year" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="89.0" layoutY="432.0" prefHeight="98.0" prefWidth="330.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btAdd" mnemonicParsing="false" onAction="#actionsInBtAdd" prefHeight="39.0" prefWidth="90.0" styleClass="search" stylesheets="@stayle.css" text="Add">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btDelete" mnemonicParsing="false" onAction="#actionsInBtDelete" prefHeight="39.0" prefWidth="90.0" styleClass="search" stylesheets="@stayle.css" text="Delete" GridPane.columnIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+      <VBox alignment="TOP_CENTER" layoutX="921.0" layoutY="74.0" prefHeight="177.0" prefWidth="163.0" spacing="20.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Button fx:id="btBrowse" mnemonicParsing="false" onAction="#actionsInBtBrowse" prefHeight="39.0" prefWidth="135.0" styleClass="search" stylesheets="@stayle.css" text="Browse">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btSearch" mnemonicParsing="false" onAction="#actionsInBtSearch" prefHeight="39.0" prefWidth="135.0" styleClass="search" stylesheets="@stayle.css" text="Search">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btMax" mnemonicParsing="false" onAction="#actionsInBtMaxFrequency" prefHeight="39.0" prefWidth="135.0" styleClass="search" stylesheets="@stayle.css" text="MAX Frequency">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

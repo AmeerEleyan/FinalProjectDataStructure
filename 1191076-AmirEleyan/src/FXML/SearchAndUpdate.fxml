@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="582.0" prefWidth="823.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SearchAndUpdateController">
+   <children>
+      <GridPane alignment="CENTER" hgap="15.0" layoutX="576.0" layoutY="95.0" prefHeight="146.0" prefWidth="226.0" style="-fx-background-color: #ffffff;">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="238.0" minWidth="0.0" prefWidth="180.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="txtName" prefHeight="35.0" prefWidth="100.0" promptText="Name" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </TextField>
+            <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="223.0" spacing="80.0" style="-fx-background-color: #ffffff;" GridPane.rowIndex="1">
+               <children>
+                  <RadioButton fx:id="rbMale" contentDisplay="CENTER" mnemonicParsing="false" text="Male">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tgGender" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="rbFemale" contentDisplay="CENTER" mnemonicParsing="false" text="Female" toggleGroup="$tgGender">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+      <GridPane alignment="CENTER" hgap="15.0" layoutX="14.0" layoutY="117.0" prefHeight="124.0" prefWidth="233.0" style="-fx-background-color: #ffffff;">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="91.79998779296875" minWidth="0.0" prefWidth="91.79998779296875" />
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="154.20001220703125" minWidth="0.0" prefWidth="126.20001220703125" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Frequency">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Years" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtFrequency" prefHeight="35.0" prefWidth="100.0" promptText="Frequency" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtYear" prefHeight="35.0" prefWidth="100.0" promptText="Year" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </TextField>
+         </children>
+      </GridPane>
+      <TableView fx:id="frequencyTable" layoutX="266.0" layoutY="32.0" onMouseClicked="#getSelected" prefHeight="502.0" prefWidth="292.0" styleClass="table" stylesheets="@stayle.css">
+         <columns>
+            <TableColumn fx:id="cmYear" editable="false" prefWidth="137.5999755859375" sortable="false" text="Year" />
+            <TableColumn fx:id="cmFrequency" editable="false" prefWidth="149.5999755859375" sortable="false" text="Frequnecy" />
+         </columns>
+      </TableView>
+      <Button fx:id="btClear" layoutX="144.0" layoutY="313.0" mnemonicParsing="false" onAction="#actionsInBtClear" prefHeight="39.0" prefWidth="90.0" styleClass="search" stylesheets="@stayle.css" text="Clear">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btUpdate" layoutX="29.0" layoutY="313.0" mnemonicParsing="false" onAction="#actionsInBtUpdate" prefHeight="39.0" prefWidth="90.0" styleClass="search" stylesheets="@stayle.css" text="Update">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btSearch" layoutX="578.0" layoutY="241.0" mnemonicParsing="false" onAction="#actionsInBtSearch" prefHeight="39.0" prefWidth="234.0" styleClass="search" stylesheets="@stayle.css" text="Search">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
