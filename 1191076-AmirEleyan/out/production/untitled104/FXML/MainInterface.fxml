@@ -17,28 +17,28 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="1100.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainInterfaceController">
    <children>
-      <TableView fx:id="babyTable" layoutX="510.0" layoutY="74.0" prefHeight="502.0" prefWidth="382.0" styleClass="table" stylesheets="@stayle.css">
+      <TableView fx:id="babyTable" layoutX="510.0" layoutY="42.0" prefHeight="502.0" prefWidth="382.0" styleClass="table" stylesheets="@stayle.css">
         <columns>
           <TableColumn fx:id="cmName" prefWidth="112.79998779296875" text="Name" />
           <TableColumn fx:id="cmGender" prefWidth="98.39996337890625" text="Gender" />
             <TableColumn fx:id="cmTotalFrequency" prefWidth="172.79998779296875" text="Total Frequnecy" />
         </columns>
       </TableView>
-      <Label fx:id="lblTotalRecorde" layoutX="510.0" layoutY="583.0" style="-fx-background-color: #ffffff;" text="Total recorde" visible="false">
+      <Label fx:id="lblTotalRecorde" layoutX="509.0" layoutY="557.0" style="-fx-background-color: #ffffff;" text="Total recorde" visible="false">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtTotalRecorde" editable="false" layoutX="509.0" layoutY="609.0" prefHeight="27.0" prefWidth="101.0" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" visible="false">
+      <TextField fx:id="txtTotalRecorde" editable="false" layoutX="508.0" layoutY="579.0" prefHeight="27.0" prefWidth="101.0" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" visible="false">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></TextField>
-      <Label fx:id="lblTotalFrequency" layoutX="773.0" layoutY="583.0" style="-fx-background-color: #ffffff;" text="Total frequency" visible="false">
+      <Label fx:id="lblTotalFrequency" layoutX="773.0" layoutY="557.0" style="-fx-background-color: #ffffff;" text="Total frequency" visible="false">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtTotalFrequency" editable="false" layoutX="773.0" layoutY="609.0" prefHeight="27.0" prefWidth="118.0" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" visible="false">
+      <TextField fx:id="txtTotalFrequency" editable="false" layoutX="773.0" layoutY="579.0" prefHeight="27.0" prefWidth="118.0" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" visible="false">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></TextField>
@@ -74,7 +74,10 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtName" prefHeight="35.0" prefWidth="100.0" promptText="Name" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" GridPane.columnIndex="1" />
+            <TextField fx:id="txtName" prefHeight="35.0" prefWidth="100.0" promptText="Name" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" GridPane.columnIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
             <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="223.0" spacing="60.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <RadioButton fx:id="rbMale" contentDisplay="CENTER" mnemonicParsing="false" text="Male">
@@ -90,14 +93,21 @@
                      </font></RadioButton>
                </children>
             </HBox>
-            <TextField fx:id="txtFrequency" prefHeight="35.0" prefWidth="100.0" promptText="Frequency" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtYear" prefHeight="35.0" prefWidth="100.0" promptText="Year" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtFrequency" prefHeight="35.0" prefWidth="100.0" promptText="Frequency" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
+            <TextField fx:id="txtYear" prefHeight="35.0" prefWidth="100.0" promptText="Year" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
          </children>
       </GridPane>
       <GridPane layoutX="89.0" layoutY="432.0" prefHeight="98.0" prefWidth="330.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -109,6 +119,11 @@
                </font>
             </Button>
             <Button fx:id="btDelete" mnemonicParsing="false" onAction="#actionsInBtDelete" prefHeight="39.0" prefWidth="90.0" styleClass="search" stylesheets="@stayle.css" text="Delete" GridPane.columnIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btClear" mnemonicParsing="false" onAction="#actionsInBtClear" prefHeight="39.0" prefWidth="90.0" styleClass="search" stylesheets="@stayle.css" text="Clear" GridPane.columnIndex="2">
                <font>
                   <Font size="16.0" />
                </font>

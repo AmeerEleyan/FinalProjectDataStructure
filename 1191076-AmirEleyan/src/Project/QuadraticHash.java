@@ -80,7 +80,7 @@ public class QuadraticHash<T extends Comparable<T>> {
 
     //  remove specific element
     // O(n), n: capacity/2
-    public T delete(T data) {
+    public HashNode<T> delete(T data) {
         for (int i = 0; i < this.capacity / 2; ++i) {
 
             int hash = this.hash(data, i * i); // get the index for this data
@@ -89,7 +89,7 @@ public class QuadraticHash<T extends Comparable<T>> {
             if (this.table[hash].getData().equals(data) && this.table[hash].isExist()) { // delete it by change his status to false
                 this.table[hash].setStatus(false);
                 this.size--;
-                return this.table[hash].getData();
+                return this.table[hash];
             }
         }
         return null;

@@ -1,10 +1,14 @@
+/**
+ * @autor: Amir Eleyan
+ * 1191076
+ * At: 29/5/2021  5:31 PM
+ */
 package Controllers;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Objects;

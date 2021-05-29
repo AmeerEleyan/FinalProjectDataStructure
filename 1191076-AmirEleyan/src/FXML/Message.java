@@ -27,12 +27,12 @@ public abstract class Message {
         window.setMinWidth(250);
 
         // Style for buttons
-        String styleBt = "-fx-background-color:  #1aff1a; -fx-background-radius:35;" + "-fx-font-size:18;-fx-border-width: 1.5; -fx-border-color: #000000;" +
+        String styleBt = "-fx-background-color:  #ffffff; -fx-background-radius:35;" + "-fx-font-size:18;-fx-border-width: 1.5; -fx-border-color: #f0a500;" +
                 "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; -fx-border-radius: 35; ";
 
         // Style for hover buttons
-        String styleHoverBt = "-fx-background-color: #ffffff;-fx-background-radius:35; " + "-fx-font-size:18;-fx-border-width: 1.5; -fx-border-color: #000000;" +
-                "-fx-text-fill:  #000000; -fx-font-family: 'Times New Roman';-fx-border-radius: 35; ";
+        String styleHoverBt = "-fx-background-color: #f0a500;-fx-background-radius:35; " + "-fx-font-size:18;-fx-border-width: 1.5; -fx-border-color: #ffffff;" +
+                "-fx-text-fill: #ffffff; -fx-font-family: 'Times New Roman'; -fx-border-radius: 35; ";
 
 
         // label for display massage

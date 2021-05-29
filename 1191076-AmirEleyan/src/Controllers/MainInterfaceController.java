@@ -1,3 +1,8 @@
+/**
+ * @autor: Amir Eleyan
+ * 1191076
+ * At: 29/5/2021  6:17 AM
+ */
 package Controllers;
 
 import FXML.Message;
@@ -80,27 +85,186 @@ public class MainInterfaceController implements Initializable {
     // display max frequency in all records in any year
     public void actionsInBtMaxFrequency() {
 
+        if (!BABYS_QUADRATIC_HASH.isEmpty()) { // check if table is empty
+
+            HashNode<Babys>[] records = BABYS_QUADRATIC_HASH.getTable();
+
+            int maxFreq = 0; // max frequency overall year
+            Frequency maxFrequency = new Frequency();
+            Babys maxBabys = new Babys();
+
+            for (HashNode<Babys> hashNode : records) { // get max from all recorde
+
+                if (hashNode != null) {
+
+                    Frequency frequency = hashNode.getFrequencyMaxHeap().getSorted()[0].getData(); // get first element which represent the max element
+
+                    if (frequency.getFrequency() > maxFreq) { // compare old max with current max
+                        maxFreq = frequency.getFrequency();
+                        maxFrequency = frequency;
+                        maxBabys = hashNode.getData();
+                    }
+                }
+            }
+
+            // display recorde info
+
+            this.txtName.setText(maxBabys.getName());
+
+            if (maxBabys.isFemale()) this.rbFemale.setSelected(true);
+            else this.rbMale.setSelected(true);
+
+            this.txtFrequency.setText(maxFrequency.getFrequency() + "");
+            this.txtYear.setText(maxFrequency.getYear() + "");
+        } else {
+            Message.displayMessage("Warning", " There are no data ");
+        }
+
     }
 
     // display search stage
     public void actionsInBtSearch() throws Exception {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../FXML/SearchAndUpdate.fxml")));
-        window.setTitle("Search for an Baby");
-        window.setScene(new Scene(root));
-        window.setResizable(false);
-        window.show();
+        if (!BABYS_QUADRATIC_HASH.isEmpty()) {
+            Stage window = new Stage();
+            window.initModality(Modality.APPLICATION_MODAL);
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../FXML/SearchAndUpdate.fxml")));
+            window.setTitle("Search for an Baby");
+            window.setScene(new Scene(root));
+            window.setOnCloseRequest(e -> { // update table when close the interface to get last changing
+                this.updateTable();
+            });
+            window.setResizable(false);
+            window.show();
+        } else {
+            Message.displayMessage("Warning", " There are no data ");
+        }
+
     }
 
     // add new recorde
     public void actionsInBtAdd() {
+        if (!BABYS_QUADRATIC_HASH.isEmpty()) {
+            if (!this.txtName.getText().isEmpty()) { // name not empty
 
+                if (isName(this.txtName.getText())) { // valid name
+
+                    if (rbFemale.isSelected() || rbMale.isSelected()) { // gender not null
+
+                        char gander;
+                        if (rbMale.isSelected()) gander = 'M';
+                        else gander = 'F'; // get gender
+
+                        if (!this.txtFrequency.getText().isEmpty()) { // frequency not empty
+
+                            if (isNumber(this.txtFrequency.getText())) { // valid frequency
+
+                                int frequency = Integer.parseInt(this.txtFrequency.getText().trim()); // get frequency
+
+                                if (!this.txtYear.getText().isEmpty()) { // year not empty
+
+                                    if (isNumber(this.txtYear.getText().trim())) { // valid year
+
+                                        int year = Integer.parseInt(this.txtYear.getText().trim()); // get year
+
+                                        HashNode<Babys> babys = BABYS_QUADRATIC_HASH.search(new Babys("" + this.txtName.getText() + "," + gander + "," + frequency, year));
+
+                                        if (babys == null) {// name not exist
+                                            BABYS_QUADRATIC_HASH.insert(new Babys("" + this.txtName.getText() + "," + gander + "," + frequency, year));
+
+                                        } else { // name exist
+                                            int search = babys.getFrequencyMaxHeap().getIndex(new Frequency(year, frequency));
+
+                                            if (search == -1) {
+                                                // name is exist but year does not exist
+                                                BABYS_QUADRATIC_HASH.insert(new Babys("" + this.txtName.getText() + "," + gander + "," + frequency, year));
+
+                                            } else {
+                                                // name is exist but year exist
+                                                int newFrequency = babys.getFrequencyMaxHeap().getHeap()[search].getData().getFrequency();
+                                                babys.getFrequencyMaxHeap().getHeap()[search].getData().setFrequency(newFrequency + frequency);
+                                            }
+                                        }
+                                        this.updateTable();
+                                        actionsInBtClear();
+                                        Message.displayMessage("Successfully", " A new recorde has been added successfully ");
+                                    } else {
+                                        Message.displayMessage("Warning", " The year is invalid");
+                                        this.txtYear.clear();
+                                    }
+
+                                } else {
+                                    Message.displayMessage("Warning", " Please enter the year");
+                                }
+
+                            } else {
+                                Message.displayMessage("Warning", " The frequency is invalid");
+                                this.txtFrequency.clear();
+                            }
+
+                        } else {
+                            Message.displayMessage("Warning", " Please enter the frequency ");
+                        }
+
+                    } else {
+                        Message.displayMessage("Warning", " Please select the gander ");
+                    }
+
+                } else {
+                    Message.displayMessage("Warning", " The name is invalid ");
+                    this.txtName.clear();
+                }
+            } else {
+                Message.displayMessage("Warning", " Please enter the name ");
+            }
+        } else {
+            Message.displayMessage("Warning", " There are no data ");
+        }
     }
 
     // delete selected recorde
     public void actionsInBtDelete() {
+        if (!BABYS_QUADRATIC_HASH.isEmpty()) {
+            if (!this.txtName.getText().isEmpty()) { // name not empty
+                if (isName(this.txtName.getText())) { // valid name
+                    if (rbFemale.isSelected() || rbMale.isSelected()) { // gender not null
 
+                        char gander;
+                        if (rbMale.isSelected()) gander = 'M';
+                        else gander = 'F'; // get gender
+
+                        // delete this record if exist
+                        HashNode<Babys> babys = BABYS_QUADRATIC_HASH.delete(new Babys(this.txtName.getText(), gander));
+
+                        if (babys == null) { // record not exist
+                            Message.displayMessage("Warning", this.txtName.getText() + " Does not exist ");
+                        } else {// record exist
+                            Message.displayMessage("Successfully", " Record deleted successfully ");
+                            babys.setFrequencyMaxHeap(new MaxHeap<>());
+                            this.updateTable();
+                            this.actionsInBtClear();
+                        }
+                    } else {
+                        Message.displayMessage("Warning", " Please select the gander ");
+                    }
+                } else {
+                    Message.displayMessage("Warning", " The name is invalid ");
+                    this.txtName.clear();
+                }
+            } else {
+                Message.displayMessage("Warning", " Please enter the name ");
+            }
+        } else {
+            Message.displayMessage("Warning", " There are no data ");
+        }
+    }
+
+    // clear data from textFiled
+    public void actionsInBtClear() {
+        this.txtName.clear();
+        this.txtYear.clear();
+        this.txtFrequency.clear();
+        this.rbMale.setSelected(false);
+        this.rbFemale.setSelected(false);
     }
 
     // upload files using a browser
@@ -133,7 +297,7 @@ public class MainInterfaceController implements Initializable {
             Scanner input = new Scanner(fileName); // instance of scanner for read data from file
             if (fileName.length() == 0) {
                 // no data in file
-                Message.displayMessage("Warning", "  There are No records in the file " + fileName + " ");
+                Message.displayMessage("Warning", "  There are no records in the file " + fileName + " ");
             } else {
                 int line = 1; // represent line on the file to display in which line has problem If that happens
 
@@ -157,7 +321,7 @@ public class MainInterfaceController implements Initializable {
             Message.displayMessage("Error", " The system can NOT find the file " + fileName + "  ");
         }
     }
-    
+
     //to view data in table view
     public void updateTable() {
 
@@ -174,7 +338,7 @@ public class MainInterfaceController implements Initializable {
             lblTotalRecorde.setVisible(true);
 
             for (HashNode<Babys> record : records) {
-                if (record != null) {
+                if (record != null && record.isExist()) {
                     int total = this.getTotalFrequency(record.getFrequencyMaxHeap());
                     // add tempNode to the table
                     this.babyTable.getItems().add(new BabyForTraverse(record.getData().getName(), record.getData().getGender(), total)); // upload data to the table
@@ -228,6 +392,18 @@ public class MainInterfaceController implements Initializable {
         return companyN.matches("[a-zA-Z]+");
     }
 
+    // To check the value of the entered numberOfShares if contain only digits or not
+    private boolean isNumber(String number) {
+        /* To check the entered number of shares, that it consists of
+           only digits
+         */
+        try {
+            int temp = Integer.parseInt(number);
+            return number.matches("\\d+") && temp > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
 }
 

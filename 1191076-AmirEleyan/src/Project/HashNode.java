@@ -27,6 +27,10 @@ public class HashNode<T extends Comparable<T>> {
         return this.frequencyMaxHeap;
     }
 
+    public void setFrequencyMaxHeap(MaxHeap<Frequency> frequencyMaxHeap) {
+        this.frequencyMaxHeap = frequencyMaxHeap;
+    }
+
     // insert new element to the max heap
     public void insertToMaxHeap(Frequency date) {
         this.frequencyMaxHeap.insert(date);
