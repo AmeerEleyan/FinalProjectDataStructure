@@ -12,13 +12,13 @@ public class QuadraticHash<T extends Comparable<T>> {
     private int size = 0;
     private int capacity;
 
-    // constructor with no arguments
+    // constructor with initial size 101
     public QuadraticHash() {
         this(101);
         this.capacity = 101;
     }
 
-    // constructor with specific arguments
+    // constructor with specific size
     public QuadraticHash(int size) {
         this.table = new HashNode[size];
         this.capacity = size;
@@ -30,9 +30,10 @@ public class QuadraticHash<T extends Comparable<T>> {
     }
 
     // insert new element
+    // O(n), n: capacity/2
     public void insert(T data) {
 
-        for (int i = 0; i < this.capacity; i++) {
+        for (int i = 0; i < this.capacity / 2; i++) {
 
             int index = hash(data, i * i); // get key fot this data
 
@@ -42,22 +43,34 @@ public class QuadraticHash<T extends Comparable<T>> {
                 if (this.size + 1 > this.capacity / 2) this.reHash();
 
                 this.table[index] = new HashNode<>(data);
-                if (data instanceof Babys) this.table[index].insertToMaxHeap(((Babys) data).getFrequency());
+                // check data if instance of  baby to to add his frequency to the heap
+                if (data instanceof Babys) {
+                    this.table[index].insertToMaxHeap(((Babys) data).getFrequency());
+                    ((Babys) data).clearFrequency();
+                }
                 this.size++;
                 break;
 
             } else if (this.table[index] != null && this.table[index].isExist()) { // index not empty and equal new element
 
-                if (data instanceof Babys && this.table[index].getData().equals(data))
+                // check data if instance of  baby to to add his frequency to the heap
+                if (data instanceof Babys && this.table[index].getData().equals(data)) {
                     this.table[index].insertToMaxHeap(((Babys) data).getFrequency());
-                break;
+                    ((Babys) data).clearFrequency();
+                    break;
+                }
 
             } else if (this.table[index] != null && !this.table[index].isExist()) {//index not empty and equal new element but deleted
 
                 this.table[index].setData(data);
                 this.table[index].setStatus(true);
-                if (data instanceof Babys && this.table[index].getData().equals(data))
+
+                // check data if instance of  baby to to add his frequency to the heap
+                if (data instanceof Babys && this.table[index].getData().equals(data)) {
                     this.table[index].insertToMaxHeap(((Babys) data).getFrequency());
+                    ((Babys) data).clearFrequency();
+                }
+
                 this.size++;
                 break;
             }
@@ -66,12 +79,14 @@ public class QuadraticHash<T extends Comparable<T>> {
     }
 
     //  remove specific element
+    // O(n), n: capacity/2
     public T delete(T data) {
-        for (int i = 0; i < this.capacity; ++i) {
-            int hash = this.hash(data, i * i);
+        for (int i = 0; i < this.capacity / 2; ++i) {
+
+            int hash = this.hash(data, i * i); // get the index for this data
             if (this.table[hash] == null) return null;
 
-            if (this.table[hash].getData().equals(data) && this.table[hash].isExist()) {
+            if (this.table[hash].getData().equals(data) && this.table[hash].isExist()) { // delete it by change his status to false
                 this.table[hash].setStatus(false);
                 this.size--;
                 return this.table[hash].getData();
@@ -81,13 +96,14 @@ public class QuadraticHash<T extends Comparable<T>> {
     }
 
     // search for an element
+    // O(n), n: capacity/2
     public HashNode<T> search(T data) {
 
-        for (int i = 0; i < this.capacity; ++i) {
+        for (int i = 0; i < this.capacity / 2; ++i) {
             int hash = this.hash(data, i * i);
-            if (this.table[hash] == null) return null;
+            if (this.table[hash] == null) return null;// not found element
 
-            if (this.table[hash].getData().equals(data) && this.table[hash].isExist()) {
+            if (this.table[hash].getData().equals(data) && this.table[hash].isExist()) { // found element
                 return this.table[hash];
             }
         }

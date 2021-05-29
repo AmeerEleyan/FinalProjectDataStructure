@@ -1,5 +1,7 @@
 /**
- * Sample Skeleton for 'SearchAndUpdate.fxml' Controller Class
+ * @autor: Amir Eleyan
+ * 1191076
+ * At: 29/5/2021  3:20 AM
  */
 
 package Controllers;
@@ -57,33 +59,35 @@ public class SearchAndUpdateController implements Initializable {
     }
 
 
+    // clear data from texts filed
     @FXML
     void actionsInBtClear() {
         this.txtFrequency.clear();
         this.txtYear.clear();
     }
 
+    //
     @FXML
     void actionsInBtUpdate() {
 
-        if (!this.txtYear.getText().isEmpty()) {
+        if (!this.txtYear.getText().isEmpty()) { // text name not empty
 
-            if (this.isNumber(this.txtYear.getText().trim())) {
+            if (this.isNumber(this.txtYear.getText().trim())) { // valid name
 
-                if (!this.txtFrequency.getText().isEmpty()) {
+                if (!this.txtFrequency.getText().isEmpty()) {// text frequency not empty
 
-                    if (this.isNumber(this.txtFrequency.getText().trim())) {
+                    if (this.isNumber(this.txtFrequency.getText().trim())) { // valid frequency
 
-                        int newYear = Integer.parseInt(this.txtYear.getText().trim());
-                        int newFrequency = Integer.parseInt(this.txtFrequency.getText().trim());
+                        int newYear = Integer.parseInt(this.txtYear.getText().trim()); // get the year from the textFiled
+                        int newFrequency = Integer.parseInt(this.txtFrequency.getText().trim());// get frequency from the textFiled
 
-                        if (this.year == newYear && this.frequency == newFrequency)
+                        if (this.year == newYear && this.frequency == newFrequency) // no change
                             return; // just update frequency in this year
 
                         // get index of the old year(same year and just update frequency)
                         int selectedObj = this.babys.getFrequencyMaxHeap().getIndex(new Frequency(this.year));
 
-                        if (this.year == newYear) {
+                        if (this.year == newYear) { // just update the frequency
                             this.babys.getFrequencyMaxHeap().getHeap()[selectedObj].getData().setFrequency(newFrequency);
 
                         } else {
@@ -91,17 +95,19 @@ public class SearchAndUpdateController implements Initializable {
                             int search = this.babys.getFrequencyMaxHeap().getIndex(new Frequency(newYear));
 
                             if (search == -1) {
+                                // update the year and the frequency, but new year does not exist
                                 this.babys.getFrequencyMaxHeap().getHeap()[selectedObj].getData().setFrequency(newFrequency);
                                 this.babys.getFrequencyMaxHeap().getHeap()[selectedObj].getData().setYear(newYear);
 
                             } else {
-
+                                // update the year and the frequency, but the new year exists,
+                                // so we add frequency in the one record and remove the other record
                                 int newFreq = this.babys.getFrequencyMaxHeap().getHeap()[search].getData().getFrequency();
                                 this.babys.getFrequencyMaxHeap().getHeap()[search].getData().setFrequency(newFreq + newFrequency);
                                 this.babys.getFrequencyMaxHeap().shiftArray(selectedObj);
                             }
                         }
-                        this.uploadDataToTable();
+                        this.uploadDataToTable(); // refresh the table after update
 
                     } else {
                         Message.displayMessage("Warning", " This frequency is invalid");
@@ -120,27 +126,31 @@ public class SearchAndUpdateController implements Initializable {
         }
     }
 
-
+    // get obj from the table when clicked in any recorde
     public void getSelected() {
         int index = this.frequencyTable.getSelectionModel().getSelectedIndex();
         if (index <= -1) return;
         this.txtYear.setText(cmYear.getCellData(index) + "");
-        this.year = cmYear.getCellData(index);
+        this.year = cmYear.getCellData(index);// store the year to use it in update
         this.txtFrequency.setText(cmFrequency.getCellData(index) + "");
-        this.frequency = cmFrequency.getCellData(index);
+        this.frequency = cmFrequency.getCellData(index);// store the  frequency to use it in update
     }
 
+
+    // Search for a baby's name and display his frequency overall years
     public void actionsInBtSearch() {
-        if (!this.txtName.getText().isEmpty()) {
-            if (this.rbFemale.isSelected() || this.rbMale.isSelected()) {
+        if (!this.txtName.getText().isEmpty()) { // text no empty
+
+            if (this.rbFemale.isSelected() || this.rbMale.isSelected()) { // gender not null
                 if (isName(this.txtName.getText().trim())) {
                     char gender;
                     if (rbMale.isSelected()) gender = 'M';
                     else gender = 'F';
 
+                    // search for the baby
                     babys = MainInterfaceController.BABYS_QUADRATIC_HASH.search(new Babys(this.txtName.getText().trim(), gender));
 
-                    if (babys != null) {
+                    if (babys != null) { // He found the child, and display his record
                         this.uploadDataToTable();
                     } else {
                         Message.displayMessage("Warning", this.txtName.getText() + " does not exist ");
@@ -163,6 +173,8 @@ public class SearchAndUpdateController implements Initializable {
         }
     }
 
+
+    // upload data to the table
     private void uploadDataToTable() {
         this.frequencyTable.getItems().clear();
         HeapNode<Frequency>[] frequencyHeapNode = babys.getFrequencyMaxHeap().getSorted();

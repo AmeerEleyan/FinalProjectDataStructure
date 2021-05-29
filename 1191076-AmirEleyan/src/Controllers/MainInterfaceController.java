@@ -72,14 +72,17 @@ public class MainInterfaceController implements Initializable {
         cmTotalFrequency.setCellValueFactory(new PropertyValueFactory<>("frequency"));
     }
 
+    // browse files and upload them
     public void actionsInBtBrowse() {
         this.uploadFiles();
     }
 
+    // display max frequency in all records in any year
     public void actionsInBtMaxFrequency() {
 
     }
 
+    // display search stage
     public void actionsInBtSearch() throws Exception {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -90,14 +93,17 @@ public class MainInterfaceController implements Initializable {
         window.show();
     }
 
+    // add new recorde
     public void actionsInBtAdd() {
 
     }
 
+    // delete selected recorde
     public void actionsInBtDelete() {
 
     }
 
+    // upload files using a browser
     public void uploadFiles() {
 
         // File Chooser
@@ -115,7 +121,6 @@ public class MainInterfaceController implements Initializable {
                     Message.displayMessage("Warning", "The year is not defined in file " + file.getName());
             }
             updateTable();
-
 
         }
     }
@@ -152,16 +157,14 @@ public class MainInterfaceController implements Initializable {
             Message.displayMessage("Error", " The system can NOT find the file " + fileName + "  ");
         }
     }
-
-    /**
-     * to view data in table view
-     */
+    
+    //to view data in table view
     public void updateTable() {
 
         if (!BABYS_QUADRATIC_HASH.isEmpty()) {
             babyTable.getItems().clear(); // clear data from table
             // get first node in the queue
-            HashNode<Babys>[] records = this.BABYS_QUADRATIC_HASH.getTable();
+            HashNode<Babys>[] records = BABYS_QUADRATIC_HASH.getTable();
 
             // total frequency in the table
             int totalFrequency = 0;
@@ -181,7 +184,7 @@ public class MainInterfaceController implements Initializable {
             }
 
             txtTotalFrequency.setText(totalFrequency + "");
-            txtTotalRecorde.setText(this.BABYS_QUADRATIC_HASH.size() + "");
+            txtTotalRecorde.setText(BABYS_QUADRATIC_HASH.size() + "");
         } else {
             txtTotalRecorde.clear();
             txtTotalFrequency.clear();
@@ -190,6 +193,7 @@ public class MainInterfaceController implements Initializable {
 
     }
 
+    // get total frequency from specific name
     public int getTotalFrequency(MaxHeap<Frequency> frequencyMaxHeap) {
         HeapNode<Frequency>[] records = frequencyMaxHeap.getHeap();
         int sum = 0;

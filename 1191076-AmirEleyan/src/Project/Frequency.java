@@ -60,6 +60,7 @@ public class Frequency implements Comparable<Frequency> {
         return Integer.compare(this.frequency, o.frequency);
     }
 
+    // compare two object if has same year
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Frequency)
