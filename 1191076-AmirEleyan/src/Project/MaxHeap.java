@@ -59,6 +59,11 @@ public class MaxHeap<T extends Comparable<T>> {
         }
     }
 
+    // swim all node after update the data inside the node
+    public void reSwim() {
+        for (int i = 1; i < this.size + 1; ++i) swim(i); // n log n
+    }
+
     // log n
     // to put this element in the right position ( to get max in the beginning of the array) after max
     private void sink(int index) {
@@ -131,8 +136,6 @@ public class MaxHeap<T extends Comparable<T>> {
         HeapNode<T>[] tempHeapNodes = this.heap.clone();
 
         HeapNode<T>[] sortedMaxHeap = new HeapNode[this.size];
-
-        for (int i = 1; i < this.size + 1; ++i) swim(i); // n log n
 
         int i = 0;
         while (this.size != 0) {

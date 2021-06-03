@@ -17,7 +17,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="1100.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainInterfaceController">
    <children>
-      <TableView fx:id="babyTable" layoutX="510.0" layoutY="42.0" prefHeight="502.0" prefWidth="382.0" styleClass="table" stylesheets="@stayle.css">
+      <TableView fx:id="babyTable" disable="true" layoutX="510.0" layoutY="42.0" prefHeight="502.0" prefWidth="382.0" styleClass="table" stylesheets="@stayle.css">
         <columns>
           <TableColumn fx:id="cmName" prefWidth="112.79998779296875" text="Name" />
           <TableColumn fx:id="cmGender" prefWidth="98.39996337890625" text="Gender" />
@@ -42,7 +42,7 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></TextField>
-      <GridPane alignment="CENTER" hgap="15.0" layoutX="73.0" layoutY="74.0" prefHeight="324.0" prefWidth="320.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="253.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="665.0" AnchorPane.topAnchor="74.0">
+      <GridPane fx:id="gridPaneText" alignment="CENTER" disable="true" hgap="15.0" layoutX="73.0" layoutY="74.0" prefHeight="324.0" prefWidth="320.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="253.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="665.0" AnchorPane.topAnchor="74.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="0.0" prefWidth="0.0" />
           <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="0.0" prefWidth="100.0" />
@@ -103,7 +103,7 @@
                </font></TextField>
          </children>
       </GridPane>
-      <GridPane layoutX="89.0" layoutY="432.0" prefHeight="98.0" prefWidth="330.0">
+      <GridPane fx:id="gridPaneButton" disable="true" layoutX="89.0" layoutY="432.0" prefHeight="98.0" prefWidth="330.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -130,7 +130,7 @@
             </Button>
          </children>
       </GridPane>
-      <VBox alignment="TOP_CENTER" layoutX="921.0" layoutY="74.0" prefHeight="177.0" prefWidth="163.0" spacing="20.0" style="-fx-background-color: #ffffff;">
+      <VBox fx:id="vBox" alignment="TOP_CENTER" disable="true" layoutX="921.0" layoutY="74.0" prefHeight="177.0" prefWidth="163.0" spacing="20.0" style="-fx-background-color: #ffffff;">
          <children>
             <Button fx:id="btBrowse" mnemonicParsing="false" onAction="#actionsInBtBrowse" prefHeight="39.0" prefWidth="135.0" styleClass="search" stylesheets="@stayle.css" text="Browse">
                <font>
@@ -149,5 +149,15 @@
             </Button>
          </children>
       </VBox>
+      <TextField fx:id="txtSizeOfData" layoutX="935.0" layoutY="252.0" prefHeight="35.0" prefWidth="135.0" promptText="Size Of Data" style="-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #f0a500;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Button fx:id="brStart" layoutX="935.0" layoutY="306.0" mnemonicParsing="false" onAction="#handleBtStart" prefHeight="39.0" prefWidth="135.0" styleClass="search" stylesheets="@stayle.css" text="Start">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

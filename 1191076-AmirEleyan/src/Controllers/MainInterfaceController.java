@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -29,7 +31,7 @@ import javafx.stage.Stage;
 
 public class MainInterfaceController implements Initializable {
 
-    public final static QuadraticHash<Babys> BABYS_QUADRATIC_HASH = new QuadraticHash<>(64019);
+    public static QuadraticHash<Babys> BABYS_QUADRATIC_HASH;
 
     @FXML // fx:id="babyTable"
     private TableView<BabyForTraverse> babyTable; // Value injected by FXMLLoader
@@ -70,6 +72,20 @@ public class MainInterfaceController implements Initializable {
     @FXML // fx:id="lblTotalFrequency"
     private Label lblTotalFrequency; // Value injected by FXMLLoader
 
+    @FXML
+    private VBox vBox;
+    @FXML
+    private GridPane gridPaneButton;
+    @FXML
+    private GridPane gridPaneText;
+
+    @FXML
+    private TextField txtSizeOfData;
+
+    @FXML
+    private Button brStart;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cmName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -97,6 +113,7 @@ public class MainInterfaceController implements Initializable {
 
                 if (hashNode != null) {
 
+                    if (hashNode.getFrequencyMaxHeap().isEmpty()) continue;
                     Frequency frequency = hashNode.getFrequencyMaxHeap().getSorted()[0].getData(); // get first element which represent the max element
 
                     if (frequency.getFrequency() > maxFreq) { // compare old max with current max
@@ -176,10 +193,10 @@ public class MainInterfaceController implements Initializable {
 
                                             if (search == -1) {
                                                 // name is exist but year does not exist
-                                                BABYS_QUADRATIC_HASH.insert(new Babys("" + this.txtName.getText() + "," + gander + "," + frequency, year));
+                                                BABYS_QUADRATIC_HASH.insert(new Babys("" + babys.getData().getName() + "," + babys.getData().getGender() + "," + frequency, year));
 
                                             } else {
-                                                // name is exist but year exist
+                                                // name is exist and year is exist
                                                 int newFrequency = babys.getFrequencyMaxHeap().getHeap()[search].getData().getFrequency();
                                                 babys.getFrequencyMaxHeap().getHeap()[search].getData().setFrequency(newFrequency + frequency);
                                             }
@@ -322,6 +339,25 @@ public class MainInterfaceController implements Initializable {
         }
     }
 
+    public void handleBtStart() {
+        if (!txtSizeOfData.getText().trim().isEmpty()) {
+            if (isNumber(txtSizeOfData.getText().trim())) {
+                int size = Integer.parseInt(txtSizeOfData.getText().trim());
+                BABYS_QUADRATIC_HASH = new QuadraticHash<>(getPrime(size * 2));
+                this.txtSizeOfData.setVisible(false);
+                this.brStart.setVisible(false);
+                this.gridPaneButton.setDisable(false);
+                this.gridPaneText.setDisable(false);
+                this.vBox.setDisable(false);
+                this.babyTable.setDisable(false);
+            } else {
+                Message.displayMessage("Warning", "The size is invalid");
+            }
+        } else {
+            Message.displayMessage("Warning", "Please enter the size of the data");
+        }
+    }
+
     //to view data in table view
     public void updateTable() {
 
@@ -404,6 +440,23 @@ public class MainInterfaceController implements Initializable {
             return false;
         }
     }
+
+    // get first prime number after specific number
+    private static int getPrime(int size) {
+        int temp = size;
+        while (true) {
+            boolean result = true;
+            for (int i = 2; i <= temp / 2; ++i) {
+                if (temp % i == 0) {
+                    result = false;
+                    break;
+                }
+            }
+            if (result) return temp;
+            else temp++;
+        }
+    }
+
 
 }
 

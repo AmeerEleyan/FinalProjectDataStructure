@@ -89,7 +89,6 @@ public class SearchAndUpdateController implements Initializable {
 
                         if (this.year == newYear) { // just update the frequency
                             this.babys.getFrequencyMaxHeap().getHeap()[selectedObj].getData().setFrequency(newFrequency);
-
                         } else {
 
                             int search = this.babys.getFrequencyMaxHeap().getIndex(new Frequency(newYear));
@@ -98,7 +97,6 @@ public class SearchAndUpdateController implements Initializable {
                                 // update the year and the frequency, but new year does not exist
                                 this.babys.getFrequencyMaxHeap().getHeap()[selectedObj].getData().setFrequency(newFrequency);
                                 this.babys.getFrequencyMaxHeap().getHeap()[selectedObj].getData().setYear(newYear);
-
                             } else {
                                 // update the year and the frequency, but the new year exists,
                                 // so we add frequency in the one record and remove the other record
@@ -107,6 +105,7 @@ public class SearchAndUpdateController implements Initializable {
                                 this.babys.getFrequencyMaxHeap().shiftArray(selectedObj);
                             }
                         }
+                        this.babys.getFrequencyMaxHeap().reSwim();
                         this.uploadDataToTable(); // refresh the table after update
 
                     } else {
