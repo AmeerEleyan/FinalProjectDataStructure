@@ -256,7 +256,7 @@ public class MainInterfaceController implements Initializable {
                             Message.displayMessage("Warning", this.txtName.getText() + " Does not exist ");
                         } else {// record exist
                             Message.displayMessage("Successfully", " Record deleted successfully ");
-                            babys.setFrequencyMaxHeap(new MaxHeap<>());
+                            babys.getFrequencyMaxHeap().clear();
                             this.updateTable();
                             this.actionsInBtClear();
                         }

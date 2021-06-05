@@ -104,6 +104,7 @@ public class MaxHeap<T extends Comparable<T>> {
     // clear this heap
     public void clear() {
         this.heap = new HeapNode[this.capacity];
+        this.size = 0;
     }
 
     // get actual size of this heap
