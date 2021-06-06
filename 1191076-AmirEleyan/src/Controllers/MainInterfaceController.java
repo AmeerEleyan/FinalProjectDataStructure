@@ -160,82 +160,80 @@ public class MainInterfaceController implements Initializable {
 
     // add new recorde
     public void actionsInBtAdd() {
-        if (!BABYS_QUADRATIC_HASH.isEmpty()) {
-            if (!this.txtName.getText().isEmpty()) { // name not empty
 
-                if (isName(this.txtName.getText())) { // valid name
+        if (!this.txtName.getText().isEmpty()) { // name not empty
 
-                    if (rbFemale.isSelected() || rbMale.isSelected()) { // gender not null
+            if (isName(this.txtName.getText())) { // valid name
 
-                        char gander;
-                        if (rbMale.isSelected()) gander = 'M';
-                        else gander = 'F'; // get gender
+                if (rbFemale.isSelected() || rbMale.isSelected()) { // gender not null
 
-                        if (!this.txtFrequency.getText().isEmpty()) { // frequency not empty
+                    char gander;
+                    if (rbMale.isSelected()) gander = 'M';
+                    else gander = 'F'; // get gender
 
-                            if (isNumber(this.txtFrequency.getText())) { // valid frequency
+                    if (!this.txtFrequency.getText().isEmpty()) { // frequency not empty
 
-                                int frequency = Integer.parseInt(this.txtFrequency.getText().trim()); // get frequency
+                        if (isNumber(this.txtFrequency.getText())) { // valid frequency
 
-                                if (!this.txtYear.getText().isEmpty()) { // year not empty
+                            int frequency = Integer.parseInt(this.txtFrequency.getText().trim()); // get frequency
 
-                                    if (isNumber(this.txtYear.getText().trim())) { // valid year
+                            if (!this.txtYear.getText().isEmpty()) { // year not empty
 
-                                        int year = Integer.parseInt(this.txtYear.getText().trim()); // get year
+                                if (isNumber(this.txtYear.getText().trim())) { // valid year
 
-                                        HashNode<Babys> babys = BABYS_QUADRATIC_HASH.search(new Babys("" + this.txtName.getText() + "," + gander + "," + frequency, year));
+                                    int year = Integer.parseInt(this.txtYear.getText().trim()); // get year
 
-                                        if (babys == null) {// name not exist
-                                            BABYS_QUADRATIC_HASH.insert(new Babys("" + this.txtName.getText() + "," + gander + "," + frequency, year));
+                                    HashNode<Babys> babys = BABYS_QUADRATIC_HASH.search(new Babys("" + this.txtName.getText() + "," + gander + "," + frequency, year));
 
-                                        } else { // name exist
-                                            int search = babys.getFrequencyMaxHeap().getIndex(new Frequency(year, frequency));
+                                    if (babys == null) {// name not exist
+                                        BABYS_QUADRATIC_HASH.insert(new Babys("" + this.txtName.getText() + "," + gander + "," + frequency, year));
 
-                                            if (search == -1) {
-                                                // name is exist but year does not exist
-                                                BABYS_QUADRATIC_HASH.insert(new Babys("" + babys.getData().getName() + "," + babys.getData().getGender() + "," + frequency, year));
+                                    } else { // name exist
+                                        int search = babys.getFrequencyMaxHeap().getIndex(new Frequency(year, frequency));
 
-                                            } else {
-                                                // name is exist and year is exist
-                                                int newFrequency = babys.getFrequencyMaxHeap().getHeap()[search].getData().getFrequency();
-                                                babys.getFrequencyMaxHeap().getHeap()[search].getData().setFrequency(newFrequency + frequency);
-                                            }
+                                        if (search == -1) {
+                                            // name is exist but year does not exist
+                                            BABYS_QUADRATIC_HASH.insert(new Babys("" + babys.getData().getName() + "," + babys.getData().getGender() + "," + frequency, year));
+
+                                        } else {
+                                            // name is exist and year is exist
+                                            int newFrequency = babys.getFrequencyMaxHeap().getHeap()[search].getData().getFrequency();
+                                            babys.getFrequencyMaxHeap().getHeap()[search].getData().setFrequency(newFrequency + frequency);
                                         }
-                                        this.updateTable();
-                                        actionsInBtClear();
-                                        Message.displayMessage("Successfully", " A new recorde has been added successfully ");
-                                    } else {
-                                        Message.displayMessage("Warning", " The year is invalid");
-                                        this.txtYear.clear();
                                     }
-
+                                    this.updateTable();
+                                    actionsInBtClear();
+                                    Message.displayMessage("Successfully", " A new recorde has been added successfully ");
                                 } else {
-                                    Message.displayMessage("Warning", " Please enter the year");
+                                    Message.displayMessage("Warning", " The year is invalid");
+                                    this.txtYear.clear();
                                 }
 
                             } else {
-                                Message.displayMessage("Warning", " The frequency is invalid");
-                                this.txtFrequency.clear();
+                                Message.displayMessage("Warning", " Please enter the year");
                             }
 
                         } else {
-                            Message.displayMessage("Warning", " Please enter the frequency ");
+                            Message.displayMessage("Warning", " The frequency is invalid");
+                            this.txtFrequency.clear();
                         }
 
                     } else {
-                        Message.displayMessage("Warning", " Please select the gander ");
+                        Message.displayMessage("Warning", " Please enter the frequency ");
                     }
 
                 } else {
-                    Message.displayMessage("Warning", " The name is invalid ");
-                    this.txtName.clear();
+                    Message.displayMessage("Warning", " Please select the gander ");
                 }
+
             } else {
-                Message.displayMessage("Warning", " Please enter the name ");
+                Message.displayMessage("Warning", " The name is invalid ");
+                this.txtName.clear();
             }
         } else {
-            Message.displayMessage("Warning", " There are no data ");
+            Message.displayMessage("Warning", " Please enter the name ");
         }
+
     }
 
     // delete selected recorde
@@ -325,7 +323,6 @@ public class MainInterfaceController implements Initializable {
                         line++; // increment the line by one
 
                     } catch (Exception ex) {
-                        System.out.println("Error " + line);
                         // the record in the file has a problem
                         Message.displayMessage("Warning", " Invalid format in line # " + line + " in file " + fileName + "  ");
                     }

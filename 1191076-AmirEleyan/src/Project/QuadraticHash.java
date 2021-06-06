@@ -26,7 +26,7 @@ public class QuadraticHash<T extends Comparable<T>> {
 
     // get the hash for specific element
     private int hash(T data, int index) {
-        return (((data.hashCode() & 0x7FFFFFFF) + index) % this.capacity);
+        return ((Math.abs(data.hashCode()) + index) % this.capacity);
     }
 
     // insert new element
