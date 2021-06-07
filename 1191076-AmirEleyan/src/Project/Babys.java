@@ -120,6 +120,6 @@ public class Babys implements Comparable<Babys> {
 
     @Override
     public int hashCode() {
-        return (this.name.toLowerCase().hashCode() + this.gender) % 2;
+        return Math.abs((this.name.toLowerCase().hashCode() + this.gender) % 2);
     }
 }

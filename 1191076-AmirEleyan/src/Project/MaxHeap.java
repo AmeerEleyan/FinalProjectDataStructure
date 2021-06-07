@@ -11,18 +11,15 @@ public class MaxHeap<T extends Comparable<T>> {
     // attribute
     private HeapNode<T>[] heap;
     private int size = 0;
-    private int capacity;
 
     // constructor with initial size 50
     public MaxHeap() {
         this(50);
-        this.capacity = 50;
     }
 
     // constructor with size
     public MaxHeap(int size) {
         this.heap = new HeapNode[size];
-        this.capacity = size;
     }
 
     // get array of heapNode
@@ -103,7 +100,7 @@ public class MaxHeap<T extends Comparable<T>> {
 
     // clear this heap
     public void clear() {
-        this.heap = new HeapNode[this.capacity];
+        this.heap = new HeapNode[this.heap.length];
         this.size = 0;
     }
 
